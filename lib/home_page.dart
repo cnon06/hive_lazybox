@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_project/model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,31 +11,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final myBox = Hive.box('test');
+  final myBox = Hive.box<Student>('students');
 
   void writeData() {
-    // myBox.put(1, "Sinan");
-
-    myBox.add("sinan ${myBox.keys.length}");
+    myBox.add(Student(id: 23, name: "sinan"));
   }
 
   void readData() {
-    myBox.keys.isNotEmpty
-        // ignore: avoid_function_literals_in_foreach_calls
-        ? myBox.keys.forEach((element) {
-            debugPrint(myBox.get(element));
-          })
-        : debugPrint("null");
-
-    // debugPrint(myBox.get(1));
+   myBox.keys.isNotEmpty ? myBox.keys.forEach((element) {
+      debugPrint(myBox.get(element)!.name.toString()+" : "+myBox.get(element)!.id.toString());
+    }) : debugPrint("Null");
   }
 
   void deleteData() {
     myBox.clear();
-    // for (var element in myBox.keys) {
-    //   //debugPrint(element.toString());
-    //   myBox.delete(element);
-    // }
   }
 
   @override
