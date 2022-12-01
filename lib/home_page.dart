@@ -19,12 +19,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void readData() {
-    
-   
     myBox.keys.isNotEmpty
         // ignore: avoid_function_literals_in_foreach_calls
         ? myBox.keys.forEach((element) {
-          
             debugPrint(myBox.get(element));
           })
         : debugPrint("null");
@@ -33,10 +30,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void deleteData() {
-    for (var element in myBox.keys) {
-      //debugPrint(element.toString());
-      myBox.delete(element);
-    }
+    myBox.clear();
+    // for (var element in myBox.keys) {
+    //   //debugPrint(element.toString());
+    //   myBox.delete(element);
+    // }
   }
 
   @override
