@@ -5,10 +5,12 @@ import 'package:hive_project/home_page.dart';
 import 'package:hive_project/model.dart';
 
 void main() async {
-  await Hive.initFlutter();
+  await Hive.initFlutter('depo');
   //  await Hive.openBox('test');
   Hive.registerAdapter(StudentAdapter());
-  await Hive.openBox<Student>('students');
+
+  // await Hive.openBox<Student>('students');
+  await Hive.openLazyBox<Student>('students1');
   runApp(const MyApp());
 }
 

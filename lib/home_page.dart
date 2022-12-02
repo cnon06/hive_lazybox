@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -11,15 +13,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final myBox = Hive.box<Student>('students');
+  final myBox = Hive.lazyBox<Student>('students1'); // box<Student>('students1');
 
   void writeData() {
-    myBox.add(Student(id: 23, name: "sinan"));
+    var random = Random();
+    myBox.add(Student(id: random.nextInt(1000), name: "sinan"));
   }
 
-  void readData() {
-   myBox.keys.isNotEmpty ? myBox.keys.forEach((element) {
-      debugPrint(myBox.get(element)!.name.toString()+" : "+myBox.get(element)!.id.toString());
+  void readData()  {
+  
+ // ignore: avoid_function_literals_in_foreach_calls
+ myBox.keys.isNotEmpty ? myBox.keys.forEach((element) async {
+      var getData = await myBox.get(element);
+    
+      debugPrint("${getData!.name} ${getData.id}");
     }) : debugPrint("Null");
   }
 

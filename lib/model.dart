@@ -9,4 +9,11 @@ class Student {
   @HiveField(1)
   final String name;
   Student({required this.id, required this.name});
+
+  @override
+  String toString() {
+    
+    return "id: $id, name: $name";
+  }
+
 }
